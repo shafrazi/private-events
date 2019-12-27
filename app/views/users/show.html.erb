@@ -1,2 +1,61 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1><%= @user.name.capitalize %>'s events</h1>
+<% if @created_events.any? %>
+  <ul class="event-listing">
+    <% @created_events.each do |event| %>
+      <li>
+        <p>Event title : <span><%= link_to(event.title, event_path(event)) %></span></p>
+        <p>Event date : <span><%= event.date %></span></p>
+      </li>
+      <hr>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @user.attended_events.any? %>
+  <hr>
+  <% if @upcoming_attended_events.any? %>
+    <div class="col-md-6">
+      <h3>Upcoming events</h3>
+      <table class="table">
+      <% @upcoming_attended_events.each do |event| %>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= event.title %></td>
+          <td><%= event.date %></td>
+        </tr>
+      </tbody>
+      <% end %>
+      </table>
+    </div>
+  <% end %>
+
+  <% if @past_attended_events.any? %>
+    <div class="col-md-6">
+    <h3>Past events</h3>
+    <table class="table">
+      <% @past_attended_events.each do |event| %>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= event.title %></td>
+          <td><%= event.date %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+  <% end %>
+<% end %>
+
+

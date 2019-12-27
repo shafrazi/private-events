@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = "Successfully signed up!"
       redirect_to user_path(@user)
+      login(@user)
     else
       render "new"
     end
@@ -15,6 +16,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @created_events = @user.created_events
+    @upcoming_attended_events = @user.attended_events.upcoming_events
+    @past_attended_events = @user.attended_events.past_events
   end
 
   private

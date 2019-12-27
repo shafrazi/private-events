@@ -1,0 +1,13 @@
+<h1>Event display</h1>  
+<h3><%= @event.title %></h3>
+<p>Event Date: <%= @event.date %></p>
+<p>Created by : <%= @event.creator.name.capitalize %></p>
+<hr>
+<% if @attendees.any? %>
+  <h2>Event attendees</h2>
+  <ul>
+    <% @attendees.each do |attendee| %>
+      <li><%= link_to(attendee.name, attendee) %></li>
+    <% end %>
+  </ul>
+<% end %>
