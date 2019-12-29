@@ -1,0 +1,8 @@
+<%= form_with(url: add_invitees_path, local: true) do |f| %>
+  <%= f.hidden_field :event_id, value: @event.id %>
+    <div class="form-group">
+      <%= f.label :invitees, "Select Invitees : " %>
+      <%= f.select :invitee_id, options_for_select(@uninvited_users.map { |user| [user.name, user.id] }) %>
+    </div>
+  <%= f.submit "Invite user", class: "btn btn-primary" %>
+<% end %>

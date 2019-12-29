@@ -6,6 +6,13 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @attendees = @event.attendees
+    @users = User.all
+    @uninvited_users = []
+    @users.each do |user|
+      unless @event.invitees.include?(user) || user == current_user
+        @uninvited_users << user
+      end
+    end
   end
 
   def new
