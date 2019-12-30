@@ -1,11 +1,45 @@
 <h1>All events</h1>
-<ul class="event-listing">
-  <% @events.each do |event| %> 
-    <li>
-      <p>Event title : <span><%= link_to(event.title, event_path(event)) %></span></p>
-      <p>Event date : <span><%= event.date %></span></p>
-      <p>Created by : <span><%= event.creator.name.capitalize %></span></p>
-    </li>
-    <hr>
-  <% end %>
-</ul>
+<div class="flex">
+  <div class="col-md-6">
+    <h4>Upcoming events</h4>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+          <th scope="col">Creator</th>
+        </tr>
+      </thead>
+      <% @upcoming_events.each do |event| %>
+        <tbody>
+          <tr>
+            <td><%= link_to(event.title, event) %></td>
+            <td><%= event.date.to_date %></td>
+            <td><%= event.creator.name %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <h4>Past events</h4>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+          <th scope="col">Creator</th>
+        </tr>
+      </thead>
+      <% @past_events.each do |event| %>
+        <tbody>
+          <tr>
+            <td><%= link_to(event.title, event) %></td>
+            <td><%= event.date.to_date %></td>
+            <td><%= event.creator.name %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

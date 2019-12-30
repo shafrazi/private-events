@@ -1,14 +1,16 @@
-<h1>Event display</h1>  
+<h1>Event display</h1>
 <h3><%= @event.title %></h3>
 <p>Event Date: <%= @event.date %></p>
 <p>Created by : <%= @event.creator.name.capitalize %></p>
-<div id="add_invitees">
-  <% if @uninvited_users.any? %>
-    <%= render "shared/add_invitees" %>
-  <% else %>
-    <p>No users to invite</p>
-  <% end %>
-</div>
+<% if @event.creator == current_user && @event.upcoming_event? %>
+  <div id="add_invitees">
+    <% if @uninvited_users.any? %>
+      <%= render "shared/add_invitees" %>
+    <% else %>
+      <p>No users to invite</p>
+    <% end %>
+  </div>
+<% end %>
 <hr>
 <% if @attendees.any? %>
   <h2>Event attendees</h2>
@@ -18,4 +20,3 @@
     <% end %>
   </ul>
 <% end %>
-

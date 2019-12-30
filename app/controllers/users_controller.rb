@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @created_events = @user.created_events
     @upcoming_attended_events = @user.attended_events.upcoming_events
     @past_attended_events = @user.attended_events.past_events
+    @invited_events = @user.invited_events
   end
 
   private

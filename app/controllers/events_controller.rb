@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all
+    @upcoming_events = Event.upcoming_events
+    @past_events = Event.past_events
   end
 
   def show
@@ -9,7 +11,7 @@ class EventsController < ApplicationController
     @users = User.all
     @uninvited_users = []
     @users.each do |user|
-      unless @event.invitees.include?(user) || user == current_user
+      unless @event.invitees.include?(user) || user == current_user || @event.attendees.include?(user)
         @uninvited_users << user
       end
     end

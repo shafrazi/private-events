@@ -14,4 +14,8 @@ class Event < ApplicationRecord
   def self.past_events
     where("date < ?", Time.zone.now)
   end
+
+  def upcoming_event?
+    self.date > Time.zone.now
+  end
 end

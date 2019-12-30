@@ -16,3 +16,13 @@ body {
   list-style: none;
   padding: 0;
 }
+
+.flex {
+  display: block;
+  box-sizing: border-box;
+}
+
+.invited-events {
+  display: block;
+  position: fixed;
+}

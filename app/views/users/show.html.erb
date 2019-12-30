@@ -10,52 +10,81 @@
     <% end %>
   </ul>
 <% end %>
-
-<% if @user.attended_events.any? %>
-  <hr>
-  <% if @upcoming_attended_events.any? %>
+<div class="flex">
+  <% if @user.attended_events.any? %>
+    <hr>
     <div class="col-md-6">
       <h3>Upcoming events</h3>
+      <% if @upcoming_attended_events.any? %>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <% @upcoming_attended_events.each do |event| %>
+            <tbody>
+              <tr>
+                <td><%= event.title %></td>
+                <td><%= event.date.to_date %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    <% else %>
+      <h5>No upcoming events</h5>
+    <% end %>
+    <br>
+    <div class="col-md-6">
+      <h3>Past events</h3>
+      <% if @past_attended_events.any? %>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <% @past_attended_events.each do |event| %>
+            <tbody>
+              <tr>
+                <td><%= event.title %></td>
+                <td><%= event.date.to_date %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    <% else %>
+      <h5>No past events</h5>
+    <% end %>
+  <% end %>
+</div>
+<br>
+<div>
+  <% if @invited_events.any? %>
+    <div class="col-md-6">
+      <h3>Invited Events</h3>
       <table class="table">
-      <% @upcoming_attended_events.each do |event| %>
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= event.title %></td>
-          <td><%= event.date %></td>
-        </tr>
-      </tbody>
-      <% end %>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @invited_events.each do |event| %>
+          <tbody>
+            <tr>
+              <td><%= event.title %></td>
+              <td><%= event.date.to_date %></td>
+              <td><%= button_to("Accept", accept_invitation_path, class: "btn btn-success", params: {event_id: event.id}) %></td>
+            </tr>
+          </tbody>
+        <% end %>
       </table>
     </div>
   <% end %>
-
-  <% if @past_attended_events.any? %>
-    <div class="col-md-6">
-    <h3>Past events</h3>
-    <table class="table">
-      <% @past_attended_events.each do |event| %>
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= event.title %></td>
-          <td><%= event.date %></td>
-        </tr>
-      </tbody>
-      <% end %>
-    </table>
-  </div>
-  <% end %>
-<% end %>
-
-
+</div>
