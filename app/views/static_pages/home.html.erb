@@ -1,4 +1,8 @@
 <div class="jumbotron text-center">
   <p><h1>Welcome to Private Events</h1></p>
-  <p><%= link_to("Sign up", signup_path, class: "btn btn-primary") %></p>
+  <% if logged_in? %>
+    <p><%= link_to("Create Event", new_event_path, class: "btn btn-success") %></p>
+  <% else %>
+    <p><%= link_to("Sign up", signup_path, class: "btn btn-primary") %></p>
+  <% end %>
 </div>
