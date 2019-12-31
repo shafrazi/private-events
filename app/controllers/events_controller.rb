@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all
-    @upcoming_events = Event.upcoming_events
-    @past_events = Event.past_events
+    @upcoming_events = Event.order(:date, :asc).upcoming_events
+    @past_events = Event.order(:date, :asc).past_events
   end
 
   def show
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build(event_params)
     if @event.save
       flash[:success] = "Event created successfully."
-      redirect_to user_path(current_user)
+      redirect_to @event
     else
       render root_path
     end
