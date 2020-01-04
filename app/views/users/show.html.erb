@@ -10,7 +10,7 @@
     <% end %>
   </ul>
 <% end %>
-<div class="flex">
+<div class="row">
   <% if @user.attended_events.any? %>
     <hr>
     <div class="col-md-6">
@@ -63,9 +63,8 @@
   <% end %>
 </div>
 <br>
-<div>
   <% if @invited_events.any? %>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <h3>Invited Events</h3>
       <table class="table">
         <thead class="thead-light">
@@ -87,4 +86,3 @@
       </table>
     </div>
   <% end %>
-</div>
